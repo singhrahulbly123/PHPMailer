@@ -34,3 +34,11 @@ function send_email($name, $email, $mobile) {
         $mail->isHTML(true);
         $mail->Subject = 'New Submission';
         $mail->Body    = "Name: $name <br>Email: $email <br>Mobile: $mobile";
+
+        $mail->send();
+        echo "Message sent";
+    } catch (Exception $e) {
+        echo "Error: {$mail->ErrorInfo}";
+    }
+}
+?>
