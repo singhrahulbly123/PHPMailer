@@ -4,6 +4,8 @@ A lightweight and secure PHP contact form built using **PHPMailer** that sends m
 Developed by **Bedhadak Rahul Singh Developer**
 
 ---
+WATCH VIDEO FOR SMTP SETUP
+https://youtu.be/98XwA_PFKOE?si=Mn2og9Sf411dYAKJ
 
 ## 🚀 Features
 
