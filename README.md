@@ -1,65 +1,75 @@
+📧 PHP Contact Form using PHPMailer
+A simple and fully functional PHP contact form using PHPMailer to send emails via Gmail SMTP.
 
-<?php
-// Bedhadak Rahul Singh Developer
-//Import PHPMailer classes into the global namespace Bedhadak Rahul Singh Developer
-//These must be at the top of your script, not inside a function Bedhadak Rahul Singh Developer
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
-use PHPMailer\PHPMailer\Exception;
+Developed by Bedhadak Rahul Singh Developer
 
-if(isset($_REQUEST['submit']))
-   {
+🚀 Features
+Collects user Name, Email, and Mobile Number
 
-$name=$_REQUEST['name'];
-$email=$_REQUEST['email'];
-$mobile=$_REQUEST['mobile'];
+Sends form data via SMTP using Gmail
 
-send_email($name,$email,$mobile);
+Uses PHPMailer for secure and reliable email sending
 
-   }
+Built with HTML + Core PHP
 
-   function send_email($name,$email,$mobile){
+Easy to configure and deploy
 
+🛠 Requirements
+PHP 7.x or higher
 
+Composer
 
-//Load Composer's autoloader
-require 'vendor/autoload.php';
+Gmail account with App Passwords enabled
 
-//Create an instance; passing `true` enables exceptions
-$mail = new PHPMailer(true);
+Internet connection (SMTP uses Gmail servers)
 
-try {
-    //Server settings
-     $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
-    $mail->isSMTP();                                            //Send using SMTP
-    $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
-    $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-    $mail->Username   = 'SMTPusername Emalil Id';                     //SMTPusername
-    $mail->Password   = 'SMTPpassword Emalil App Password';                               //SMTPpassword
-    $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
-    $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+📦 Installation
+Clone or download this repository:
 
-    //Recipients
-    $mail->setFrom('SMTPusername', 'Bedhadak Rahul Singh Developer');
-    $mail->addAddress('example@gmail.com', 'Bedhadak Rahul Singh Developer');     //Add a recipient
-     $mail->addAddress('example@gmail.com');
-     $mail->addCC('');
+bash
+Copy
+Edit
+git clone https://github.com/your-username/your-repo.git
+cd your-repo
+Install PHPMailer using Composer:
 
-    //Attachments
-    // $mail->addAttachment('/var/tmp/file.tar.gz');         //Add attachments
-    // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    //Optional name
+bash
+Copy
+Edit
+composer require phpmailer/phpmailer
+Update your SMTP credentials in the send_email() function:
 
-    //Content
-    $mail->isHTML(true);                                  //Set email format to HTML
-    $mail->Subject = 'Bedhadak Rahul Singh Developer';
-    $mail->Body    = "Name : $name <br> Email : $email <br> Mobile : $mobile";
-    //$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
-    
-    $mail->send();
-    // echo 'Message has been sent';
-    $message="Message has been sent";
-} catch (Exception $e) {
-    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-}
-}
-?>
+php
+Copy
+Edit
+$mail->Username = 'your-gmail@example.com'; // Your Gmail
+$mail->Password = 'your-app-password';      // Your Gmail App Password
+Customize the recipient email:
+
+php
+Copy
+Edit
+$mail->addAddress('your-receiving-email@example.com');
+📋 How to Use
+Open the contact form in a browser.
+
+Fill in your Name, Email, and Mobile Number.
+
+Click Submit.
+
+You’ll receive an email with the form details.
+
+🔒 Gmail App Password Setup
+Enable 2-Step Verification on your Gmail account.
+
+Go to Google App Passwords
+
+Generate an App Password for "Mail".
+
+Use that password in the $mail->Password field.
+
+🧑‍💻 Author
+Bedhadak Rahul Singh Developer
+
+📜 License
+This project is open-source and free to use. Add your preferred license if needed.
