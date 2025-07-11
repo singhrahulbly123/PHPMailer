@@ -50,7 +50,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
-// if (isset($_REQUEST['submit'])) {
+ if (isset($_REQUEST['submit'])) {
     $name = $_REQUEST['name'];
     $email = $_REQUEST['email'];
     $mobile = $_REQUEST['mobile'];
@@ -58,7 +58,7 @@ use PHPMailer\PHPMailer\Exception;
     send_email($name, $email, $mobile);
 }
 
-// function send_email($name, $email, $mobile) {
+ function send_email($name, $email, $mobile) {
     require 'vendor/autoload.php';
 
     $mail = new PHPMailer(true);
@@ -88,12 +88,6 @@ use PHPMailer\PHPMailer\Exception;
     }
 }
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Contact Form | Bedhadak Rahul Singh Developer</title>
-</head>
-<body>
 
     <h2>Contact Form</h2>
     <form method="POST" action="">
@@ -120,8 +114,7 @@ use PHPMailer\PHPMailer\Exception;
         </table>
     </form>
 
-</body>
-</html>
+
 
 🔐 How to Set Up Gmail App Password
 Enable 2-Step Verification in your Gmail account.
