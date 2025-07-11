@@ -49,7 +49,6 @@ Configure your Gmail SMTP credentials inside the PHP code.
 PHPMAILER CODE COPY 
 
 
-<?php
 // Bedhadak Rahul Singh Developer
 
 use PHPMailer\PHPMailer\PHPMailer;
@@ -96,7 +95,6 @@ function send_email($name, $email, $mobile) {
         echo "<p>❌ Message could not be sent. Mailer Error: {$mail->ErrorInfo}</p>";
     }
 }
-?>
 
 <!DOCTYPE html>
 <html>
