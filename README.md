@@ -46,71 +46,93 @@ composer require phpmailer/phpmailer
 Configure your Gmail SMTP credentials inside the PHP code.
 
 💻 Code Overview
+PHPMAILER CODE COPY 
+
 
 <?php
 // Bedhadak Rahul Singh Developer
-//Import PHPMailer classes into the global namespace Bedhadak Rahul Singh Developer
-//These must be at the top of your script, not inside a function Bedhadak Rahul Singh Developer
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
-if(isset($_REQUEST['submit']))
-   {
+// Handle form submission
+if (isset($_POST['submit'])) {
+    $name   = $_POST['name'] ?? '';
+    $email  = $_POST['email'] ?? '';
+    $mobile = $_POST['mobile'] ?? '';
 
-$name=$_REQUEST['name'];
-$email=$_REQUEST['email'];
-$mobile=$_REQUEST['mobile'];
-
-send_email($name,$email,$mobile);
-
-   }
-
-   function send_email($name,$email,$mobile){
-
-
-
-//Load Composer's autoloader
-require 'vendor/autoload.php';
-
-//Create an instance; passing `true` enables exceptions
-$mail = new PHPMailer(true);
-
-try {
-    //Server settings
-     $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
-    $mail->isSMTP();                                            //Send using SMTP
-    $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
-    $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-    $mail->Username   = 'SMTPusername Emalil Id';                     //SMTPusername
-    $mail->Password   = 'SMTPpassword Emalil App Password';                               //SMTPpassword
-    $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
-    $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
-
-    //Recipients
-    $mail->setFrom('SMTPusername', 'Bedhadak Rahul Singh Developer');
-    $mail->addAddress('example@gmail.com', 'Bedhadak Rahul Singh Developer');     //Add a recipient
-     $mail->addAddress('example@gmail.com');
-     $mail->addCC('');
-
-    //Attachments
-    // $mail->addAttachment('/var/tmp/file.tar.gz');         //Add attachments
-    // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    //Optional name
-
-    //Content
-    $mail->isHTML(true);                                  //Set email format to HTML
-    $mail->Subject = 'Bedhadak Rahul Singh Developer';
-    $mail->Body    = "Name : $name <br> Email : $email <br> Mobile : $mobile";
-    //$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
-    
-    $mail->send();
-    // echo 'Message has been sent';
-    $message="Message has been sent";
-} catch (Exception $e) {
-    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+    send_email($name, $email, $mobile);
 }
+
+function send_email($name, $email, $mobile) {
+    require 'vendor/autoload.php'; // Composer autoload
+
+    $mail = new PHPMailer(true);
+
+    try {
+        // Server settings
+        $mail->SMTPDebug  = SMTP::DEBUG_OFF;                  
+        $mail->isSMTP();                                      
+        $mail->Host       = 'smtp.gmail.com';                 
+        $mail->SMTPAuth   = true;                             
+        $mail->Username   = 'your-gmail@example.com';         // Your Gmail
+        $mail->Password   = 'your-app-password';              // Gmail App Password
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;      
+        $mail->Port       = 465;                              
+
+        // Recipients
+        $mail->setFrom('your-gmail@example.com', 'Bedhadak Rahul Singh Developer');
+        $mail->addAddress('receiver@example.com', 'Receiver');  
+
+        // Content
+        $mail->isHTML(true);                                  
+        $mail->Subject = 'New Contact Form Submission';
+        $mail->Body    = "Name: $name <br>Email: $email <br>Mobile: $mobile";
+
+        $mail->send();
+        echo "<p>✅ Message has been sent successfully.</p>";
+    } catch (Exception $e) {
+        echo "<p>❌ Message could not be sent. Mailer Error: {$mail->ErrorInfo}</p>";
+    }
 }
 ?>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Contact Form | Bedhadak Rahul Singh Developer</title>
+</head>
+<body>
+
+    <h2>Contact Form</h2>
+    <form method="POST" action="">
+        <table cellpadding="10">
+            <tr>
+                <td><label for="name">Full Name:</label></td>
+                <td><input type="text" name="name" id="name" required></td>
+            </tr>
+
+            <tr>
+                <td><label for="email">Email Address:</label></td>
+                <td><input type="email" name="email" id="email" required></td>
+            </tr>
+
+            <tr>
+                <td><label for="mobile">Mobile Number:</label></td>
+                <td><input type="text" name="mobile" id="mobile" required></td>
+            </tr>
+
+            <tr>
+                <td></td>
+                <td><button type="submit" name="submit">Send Message</button></td>
+            </tr>
+        </table>
+    </form>
+
+</body>
+</html>
+
 🔐 How to Set Up Gmail App Password
 Enable 2-Step Verification in your Gmail account.
 
