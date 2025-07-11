@@ -46,52 +46,69 @@ composer require phpmailer/phpmailer
 Configure your Gmail SMTP credentials inside the PHP code.
 
 💻 Code Overview
-📁 index.php (Main Form Handling Code)
-php
-Copy
-Edit
+
 <?php
 // Bedhadak Rahul Singh Developer
+//Import PHPMailer classes into the global namespace Bedhadak Rahul Singh Developer
+//These must be at the top of your script, not inside a function Bedhadak Rahul Singh Developer
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
-if (isset($_REQUEST['submit'])) {
-    $name = $_REQUEST['name'];
-    $email = $_REQUEST['email'];
-    $mobile = $_REQUEST['mobile'];
+if(isset($_REQUEST['submit']))
+   {
 
-    send_email($name, $email, $mobile);
+$name=$_REQUEST['name'];
+$email=$_REQUEST['email'];
+$mobile=$_REQUEST['mobile'];
+
+send_email($name,$email,$mobile);
+
+   }
+
+   function send_email($name,$email,$mobile){
+
+
+
+//Load Composer's autoloader
+require 'vendor/autoload.php';
+
+//Create an instance; passing `true` enables exceptions
+$mail = new PHPMailer(true);
+
+try {
+    //Server settings
+     $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
+    $mail->isSMTP();                                            //Send using SMTP
+    $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
+    $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+    $mail->Username   = 'SMTPusername Emalil Id';                     //SMTPusername
+    $mail->Password   = 'SMTPpassword Emalil App Password';                               //SMTPpassword
+    $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
+    $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+
+    //Recipients
+    $mail->setFrom('SMTPusername', 'Bedhadak Rahul Singh Developer');
+    $mail->addAddress('example@gmail.com', 'Bedhadak Rahul Singh Developer');     //Add a recipient
+     $mail->addAddress('example@gmail.com');
+     $mail->addCC('');
+
+    //Attachments
+    // $mail->addAttachment('/var/tmp/file.tar.gz');         //Add attachments
+    // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    //Optional name
+
+    //Content
+    $mail->isHTML(true);                                  //Set email format to HTML
+    $mail->Subject = 'Bedhadak Rahul Singh Developer';
+    $mail->Body    = "Name : $name <br> Email : $email <br> Mobile : $mobile";
+    //$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+    
+    $mail->send();
+    // echo 'Message has been sent';
+    $message="Message has been sent";
+} catch (Exception $e) {
+    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
 }
-
-function send_email($name, $email, $mobile) {
-    require 'vendor/autoload.php';
-
-    $mail = new PHPMailer(true);
-
-    try {
-        $mail->SMTPDebug = SMTP::DEBUG_OFF; // Change to DEBUG_SERVER for verbose output
-        $mail->isSMTP();
-        $mail->Host = 'smtp.gmail.com';
-        $mail->SMTPAuth = true;
-        $mail->Username = 'your-gmail@example.com'; // Replace with your Gmail
-        $mail->Password = 'your-app-password';       // Replace with your App Password
-        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
-        $mail->Port = 465;
-
-        $mail->setFrom('your-gmail@example.com', 'Bedhadak Rahul Singh Developer');
-        $mail->addAddress('receiver@example.com', 'Receiver Name');
-        $mail->addReplyTo($email, $name);
-
-        $mail->isHTML(true);
-        $mail->Subject = 'New Contact Form Submission';
-        $mail->Body = "Name: $name <br> Email: $email <br> Mobile: $mobile";
-
-        $mail->send();
-        echo "Message has been sent";
-    } catch (Exception $e) {
-        echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-    }
 }
 ?>
 🔐 How to Set Up Gmail App Password
